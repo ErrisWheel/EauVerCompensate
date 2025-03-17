@@ -21,7 +21,20 @@
     <header>
         <h1>Eau Ver Compensate</h1>
         <p class="tagline">"Arouse the Nose, Command the Room."</p>
+        <button class="profile-btn">
+            <img src="https://png.pngtree.com/recommend-works/png-clipart/20241204/ourmid/pngtree-profile-button-game-ui-png-image_14604633.png" alt="Profile" />
+        </button>
     </header>
+
+    <div id="login-prompt" class="hidden">
+        <div class="login-box">
+            <button class="close-btn" onclick="closeLoginPrompt()">❌</button>
+            <h2>Login Required</h2>
+            <p>You must be logged in to continue shopping.</p>
+            <button onclick="redirectToLogin()">Login</button>
+            <button onclick="redirectToSignup()">Sign Up</button>
+        </div>
+    </div>
 
     <div class="container">
         <p>Experience the essence of elegance.</p>
@@ -78,6 +91,21 @@
         <button class="next-btn">&#10095;</button>
     </div>
     
+    <div id="chatbot-container">
+        <button id="chatbot-btn">💬</button>
+        <div id="chatbot-box">
+            <div id="chatbot-header">
+                <span>Chatbot</span>
+                <button id="close-chatbot">×</button>
+            </div>
+            <div id="chatbot-messages"></div>
+            <div id="chatbot-footer">
+                <input type="text" id="chatbot-input" placeholder="Type a message..." />
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
