@@ -86,27 +86,48 @@ document.addEventListener("DOMContentLoaded", function () {
     const profileBtn = document.querySelector(".profile-btn");
     const loginPrompt = document.getElementById("login-prompt");
     const closeBtn = document.querySelector(".close-btn");
-
-    let isLoggedIn = false;
+    const loginBtn = document.getElementById("login-btn");
+    const signupBtn = document.getElementById("signup-btn");
+    const forgotBtn = document.getElementById("forgot-btn");
 
     profileBtn.addEventListener("click", function () {
-        if (!isLoggedIn) {
-            loginPrompt.style.display = "block";
-        } else {
-            alert("Welcome to your profile!");
-        }
+        loginPrompt.style.display = "block";
     });
-
-    function redirectToLogin() {
-        window.location.href = "login.html";
-    }
-
-    function redirectToSignup() {
-        window.location.href = "signup.html";
-    }
 
     closeBtn.addEventListener("click", function () {
         loginPrompt.style.display = "none";
+    });
+
+    loginBtn.addEventListener("click", function () {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const rememberMe = document.getElementById("rememberMe").checked;
+
+        if (!email || !password) {
+            alert("Email and password are required!");
+            return;
+        }
+
+        console.log(`Login Attempt: Username: ${username}, Email: ${email}, Password: ${password}, Remember Me: ${rememberMe}`);
+        alert("Login successful! (Simulated)");
+        loginPrompt.style.display = "none";
+    });
+
+    signupBtn.addEventListener("click", function () {
+        window.location.href = "signup.html";
+    });
+
+    forgotBtn.addEventListener("click", function () {
+        alert("Redirecting to Forgot Password...");
+        window.location.href = "forgot-password.html";
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener("click", function (event) {
+        if (event.target === loginPrompt) {
+            loginPrompt.style.display = "none";
+        }
     });
 });
 
