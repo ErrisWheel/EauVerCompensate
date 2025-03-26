@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sideNav.classList.remove("active");
             document.body.classList.remove("nav-open");
     
-            adjustChatbotPosition(); // This is missing in your code
+            adjustChatbotPosition();
         }
     });
 });
