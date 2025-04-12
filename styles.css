@@ -11,7 +11,6 @@ body {
     text-align: center;
     font-family: 'Playfair Display', serif;
     color: white;
-    overflow: hidden;
     background: linear-gradient(45deg, #5b3b00, #3a004d);
     background-size: 200% 200%;
     animation: gradientMove 6s infinite alternate;
@@ -534,6 +533,59 @@ p {
         transform: translateY(0);
     }
 }
+
+/** Product part **/
+.product-section {
+    margin-top: 1400px;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 2px solid #d4b28c;
+}
+
+.product-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #d4b28c;
+    font-family: 'Playfair Display', serif;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    justify-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #d4b28c;
+    border-radius: 10px;
+    padding: 15px;
+    width: 180px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.product-card p {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+}
+
 /** SCROLLBAR **/
 ::-webkit-scrollbar {
     width: 10px;
