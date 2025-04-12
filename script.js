@@ -205,60 +205,104 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-    // perfume producs
+// perfume producs
 document.addEventListener('DOMContentLoaded', () => {
     const products = [
-        // female perfs
-        { name: "Vanilla Lace", gender: "female" },
-        { name: "Weekend", gender: "female" },
-        { name: "Eclat d'Arpege", gender: "female" },
-        { name: "Incanto Shine", gender: "female" },
-        { name: "Fantasy", gender: "female" },
-        { name: "Green Tea", gender: "female" },
-        { name: "Omnia Amethyste", gender: "female" },
-        { name: "Light Blue", gender: "female" },
-        { name: "Bombshell", gender: "female" },
-        { name: "Bright Crystal", gender: "female" },
-        { name: "Chance", gender: "female" },
-        { name: "Cucumber Melon", gender: "female" },
+        // female perfumes
+        { name: "Vanilla Lace", gender: "female", type: "body-mist", price: 250 },
+        { name: "Weekend", gender: "female", type: "eau-de-parfum", price: 1200 },
+        { name: "Eclat d'Arpege", gender: "female", type: "eau-de-parfum", price: 1450 },
+        { name: "Incanto Shine", gender: "female", type: "body-mist", price: 300 },
+        { name: "Fantasy", gender: "female", type: "body-mist", price: 275 },
+        { name: "Green Tea", gender: "female", type: "body-mist", price: 290 },
+        { name: "Omnia Amethyste", gender: "female", type: "eau-de-parfum", price: 1600 },
+        { name: "Light Blue", gender: "female", type: "eau-de-parfum", price: 1400 },
+        { name: "Bombshell", gender: "female", type: "body-mist", price: 350 },
+        { name: "Bright Crystal", gender: "female", type: "eau-de-parfum", price: 1550 },
+        { name: "Chance", gender: "female", type: "eau-de-parfum", price: 1650 },
+        { name: "Cucumber Melon", gender: "female", type: "body-mist", price: 270 },
 
-        // male perfs
-        { name: "Fahrenheit", gender: "male" },
-        { name: "Noir", gender: "male" },
-        { name: "Red", gender: "male" },
-        { name: "Legend", gender: "male" },
-        { name: "Bvlgari Extreme", gender: "male" },
-        { name: "CK One", gender: "male" },
-        { name: "Coolwater", gender: "male" },
-        { name: "Eternity Aqua", gender: "male" },
-        { name: "Acqua di Gio", gender: "male" },
-        { name: "Aventus", gender: "male" },
-        { name: "Benetton", gender: "male" },
-        { name: "Bvlgari Aqua Amara", gender: "male" }
+        // male perfumes
+        { name: "Fahrenheit", gender: "male", type: "eau-de-parfum", price: 1500 },
+        { name: "Noir", gender: "male", type: "eau-de-parfum", price: 1300 },
+        { name: "Red", gender: "male", type: "body-mist", price: 290 },
+        { name: "Legend", gender: "male", type: "eau-de-parfum", price: 1400 },
+        { name: "Bvlgari Extreme", gender: "male", type: "eau-de-parfum", price: 1600 },
+        { name: "CK One", gender: "male", type: "body-mist", price: 280 },
+        { name: "Coolwater", gender: "male", type: "eau-de-parfum", price: 1300 },
+        { name: "Eternity Aqua", gender: "male", type: "eau-de-parfum", price: 1500 },
+        { name: "Acqua di Gio", gender: "male", type: "eau-de-parfum", price: 1700 },
+        { name: "Aventus", gender: "male", type: "eau-de-parfum", price: 1850 },
+        { name: "Benetton", gender: "male", type: "body-mist", price: 300 },
+        { name: "Bvlgari Aqua Amara", gender: "male", type: "eau-de-parfum", price: 1550 }
     ];
 
-    // prioduct shuffle
+    const container = document.getElementById("all-products");
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-btn");
+    const dropdown = document.getElementById("filter-dropdown");
+
     function shuffle(array) {
         return array.sort(() => Math.random() - 0.5);
     }
 
-    function renderProducts() {
-        const container = document.getElementById("all-products");
+    function renderProducts(productList) {
         container.innerHTML = "";
-
-        const shuffled = shuffle(products);
-
-        shuffled.forEach(product => {
+        productList.forEach(product => {
             const card = document.createElement("div");
             card.classList.add("product-card");
             card.setAttribute("data-gender", product.gender);
+            card.setAttribute("data-type", product.type);
+            card.setAttribute("data-price", product.price);
             card.innerHTML = `
-                <img src="https://imgur.com/FTRWYTr.png" alt="${product.name}">
+                <img src="https://i.imgur.com/FTRWYTr.png" alt="${product.name}">
                 <p>${product.name}</p>
+                <span>₱${product.price}</span>
             `;
             container.appendChild(card);
         });
     }
 
-    renderProducts();
+    function applyFilters() {
+        const searchQuery = searchInput.value.toLowerCase();
+        const filterValue = dropdown.value;
+
+        let filtered = [...products];
+
+        // search by name
+        if (searchQuery) {
+            filtered = filtered.filter(product =>
+                product.name.toLowerCase().includes(searchQuery)
+            );
+        }
+
+        // filter by gender
+        if (filterValue === "gender-male") {
+            filtered = filtered.filter(product => product.gender === "male");
+        } else if (filterValue === "gender-female") {
+            filtered = filtered.filter(product => product.gender === "female");
+        }
+
+        // filter by type
+        if (filterValue === "type-body-mist") {
+            filtered = filtered.filter(product => product.type === "body-mist");
+        } else if (filterValue === "type-eau-de-parfum") {
+            filtered = filtered.filter(product => product.type === "eau-de-parfum");
+        }
+
+        // sort by price
+        if (filterValue === "sort-price-low") {
+            filtered.sort((a, b) => a.price - b.price);
+        } else if (filterValue === "sort-price-high") {
+            filtered.sort((a, b) => b.price - a.price);
+        }
+
+        renderProducts(filtered);
+    }
+
+    renderProducts(shuffle(products));
+
+    searchInput.addEventListener('input', applyFilters);
+    searchButton.addEventListener('click', applyFilters);
+    dropdown.addEventListener('change', applyFilters);
 });
