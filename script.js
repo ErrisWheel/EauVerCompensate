@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "forgot-password.html";
     });
 
-    // Close modal when clicking outside
     window.addEventListener("click", function (event) {
         if (event.target === loginPrompt) {
             loginPrompt.style.display = "none";
@@ -204,4 +203,62 @@ document.addEventListener("DOMContentLoaded", function () {
             chatbotBox.style.left = "20px";
         }
     }
+});
+
+    // perfume producs
+document.addEventListener('DOMContentLoaded', () => {
+    const products = [
+        // female perfs
+        { name: "Vanilla Lace", gender: "female" },
+        { name: "Weekend", gender: "female" },
+        { name: "Eclat d'Arpege", gender: "female" },
+        { name: "Incanto Shine", gender: "female" },
+        { name: "Fantasy", gender: "female" },
+        { name: "Green Tea", gender: "female" },
+        { name: "Omnia Amethyste", gender: "female" },
+        { name: "Light Blue", gender: "female" },
+        { name: "Bombshell", gender: "female" },
+        { name: "Bright Crystal", gender: "female" },
+        { name: "Chance", gender: "female" },
+        { name: "Cucumber Melon", gender: "female" },
+
+        // male perfs
+        { name: "Fahrenheit", gender: "male" },
+        { name: "Noir", gender: "male" },
+        { name: "Red", gender: "male" },
+        { name: "Legend", gender: "male" },
+        { name: "Bvlgari Extreme", gender: "male" },
+        { name: "CK One", gender: "male" },
+        { name: "Coolwater", gender: "male" },
+        { name: "Eternity Aqua", gender: "male" },
+        { name: "Acqua di Gio", gender: "male" },
+        { name: "Aventus", gender: "male" },
+        { name: "Benetton", gender: "male" },
+        { name: "Bvlgari Aqua Amara", gender: "male" }
+    ];
+
+    // prioduct shuffle
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function renderProducts() {
+        const container = document.getElementById("all-products");
+        container.innerHTML = "";
+
+        const shuffled = shuffle(products);
+
+        shuffled.forEach(product => {
+            const card = document.createElement("div");
+            card.classList.add("product-card");
+            card.setAttribute("data-gender", product.gender);
+            card.innerHTML = `
+                <img src="https://imgur.com/FTRWYTr.png" alt="${product.name}">
+                <p>${product.name}</p>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    renderProducts();
 });
