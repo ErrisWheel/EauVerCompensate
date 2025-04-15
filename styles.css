@@ -742,6 +742,19 @@ p {
     background: #e6c9a5;
 }
 
+/** cart quick add shit **/
+.quick-add {
+    background: #d4b28c;
+    color: #3a004d;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    padding: 8px 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
 .quick-add:hover {
     background: #b8956b;
 }
