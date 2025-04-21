@@ -222,32 +222,32 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', () => {
     const products = [
         // male perfumes
-        { id: "0001", name: "Fahrenheit", gender: "male", type: "eau-de-parfum", price: 1500 },
-        { id: "0002", name: "Noir", gender: "male", type: "eau-de-parfum", price: 1300 },
-        { id: "0003", name: "Red", gender: "male", type: "body-mist", price: 290 },
-        { id: "0004", name: "Legend", gender: "male", type: "eau-de-parfum", price: 1400 },
-        { id: "0005", name: "Bvlgari Extreme", gender: "male", type: "eau-de-parfum", price: 1600 },
-        { id: "0006", name: "CK One", gender: "male", type: "body-mist", price: 280 },
-        { id: "0007", name: "Coolwater", gender: "male", type: "eau-de-parfum", price: 1300 },
-        { id: "0008", name: "Eternity Aqua", gender: "male", type: "eau-de-parfum", price: 1500 },
-        { id: "0009", name: "Acqua di Gio", gender: "male", type: "eau-de-parfum", price: 1700 },
-        { id: "0010", name: "Aventus", gender: "male", type: "eau-de-parfum", price: 1850 },
-        { id: "0011", name: "Benetton", gender: "male", type: "body-mist", price: 300 },
-        { id: "0012", name: "Bvlgari Aqua Amara", gender: "male", type: "eau-de-parfum", price: 1550 },
+        { id: "0001", name: "Fahrenheit", gender: "male", type: "eau-de-parfum", price: 1500, description: "A warm and spicy fragrance with notes of leather, mandarin, and nutmeg.", imageUrl: "https://i.imgur.com/8XXOVbI.png" },
+        { id: "0002", name: "Noir", gender: "male", type: "eau-de-parfum", price: 1300, description: "A dark and mysterious scent with hints of bergamot, vanilla, and musk.", imageUrl: "https://i.imgur.com/i8KsgD8.png" },
+        { id: "0003", name: "Red", gender: "male", type: "body-mist", price: 290, description: "A fresh and invigorating fragrance with a zesty citrus opening.", imageUrl: "https://i.imgur.com/RlmSA4q.png" },
+        { id: "0004", name: "Legend", gender: "male", type: "eau-de-parfum", price: 1400, description: "A woody fragrance with notes of lavender, oak, and apple.", imageUrl: "https://i.imgur.com/klTCBtE.png" },
+        { id: "0005", name: "Bvlgari Extreme", gender: "male", type: "eau-de-parfum", price: 1600, description: "A sophisticated scent with a mix of citrus, spices, and wood.", imageUrl: "https://i.imgur.com/FAWxnn2.png" },
+        { id: "0006", name: "CK One", gender: "male", type: "body-mist", price: 280, description: "A refreshing, unisex fragrance with notes of green tea, papaya, and bergamot.", imageUrl: "https://i.imgur.com/dprLibM.png" },
+        { id: "0007", name: "Coolwater", gender: "male", type: "eau-de-parfum", price: 1300, description: "A clean and aquatic scent with refreshing notes of mint, lavender, and sandalwood.", imageUrl: "https://i.imgur.com/nGE9kX6.png" },
+        { id: "0008", name: "Eternity Aqua", gender: "male", type: "eau-de-parfum", price: 1500, description: "A fresh and aquatic fragrance with notes of cucumber, citrus, and sandalwood.", imageUrl: "https://i.imgur.com/hzGskMV.png" },
+        { id: "0009", name: "Acqua di Gio", gender: "male", type: "eau-de-parfum", price: 1700, description: "A classic aquatic fragrance with notes of jasmine, rosemary, and citrus.", imageUrl: "https://i.imgur.com/3GoOKik.png" },
+        { id: "0010", name: "Aventus", gender: "male", type: "eau-de-parfum", price: 1850, description: "A bold fragrance with a blend of pineapple, birch, and musk.", imageUrl: "https://i.imgur.com/xxhvedv.png" },
+        { id: "0011", name: "Benetton", gender: "male", type: "body-mist", price: 300, description: "A simple and fresh scent with citrus notes and light florals.", imageUrl: "https://i.imgur.com/lJWyvGd.png" },
+        { id: "0012", name: "Bvlgari Aqua Amara", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://i.imgur.com/QF3fi0m.png" },
 
         // female perfumes
-        { id: "0013", name: "Vanilla Lace", gender: "female", type: "body-mist", price: 250 },
-        { id: "0014", name: "Weekend", gender: "female", type: "eau-de-parfum", price: 1200 },
-        { id: "0015", name: "Eclat d'Arpege", gender: "female", type: "eau-de-parfum", price: 1450 },
-        { id: "0016", name: "Incanto Shine", gender: "female", type: "body-mist", price: 300 },
-        { id: "0017", name: "Fantasy", gender: "female", type: "body-mist", price: 275 },
-        { id: "0018", name: "Green Tea", gender: "female", type: "body-mist", price: 290 },
-        { id: "0019", name: "Omnia Amethyste", gender: "female", type: "eau-de-parfum", price: 1600 },
-        { id: "0020", name: "Light Blue", gender: "female", type: "eau-de-parfum", price: 1400 },
-        { id: "0021", name: "Bombshell", gender: "female", type: "body-mist", price: 350 },
-        { id: "0022", name: "Bright Crystal", gender: "female", type: "eau-de-parfum", price: 1550 },
-        { id: "0023", name: "Chance", gender: "female", type: "eau-de-parfum", price: 1650 },
-        { id: "0024", name: "Cucumber Melon", gender: "female", type: "body-mist", price: 270 }
+        { id: "0013", name: "Vanilla Lace", gender: "female", type: "body-mist", price: 250, description: "A sweet, floral fragrance with rich vanilla notes.", imageUrl: "https://i.imgur.com/1Xi6uYC.png" },
+        { id: "0014", name: "Weekend", gender: "female", type: "eau-de-parfum", price: 1200, description: "A fresh and light fragrance with a blend of citrus, florals, and musk.", imageUrl: "https://i.imgur.com/nLtDzaJ.png" },
+        { id: "0015", name: "Eclat d'Arpege", gender: "female", type: "eau-de-parfum", price: 1450, description: "A floral fragrance with notes of peach, lilac, and green tea.", imageUrl: "https://i.imgur.com/UGqNkcW.png" },
+        { id: "0016", name: "Incanto Shine", gender: "female", type: "body-mist", price: 300, description: "A fruity and floral fragrance with notes of passionfruit, jasmine, and orange.", imageUrl: "https://i.imgur.com/J3UWAfD.png" },
+        { id: "0017", name: "Fantasy", gender: "female", type: "body-mist", price: 275, description: "A sweet and fruity fragrance with notes of kiwi, cupcake, and jasmine.", imageUrl: "https://i.imgur.com/yO8378U.png" },
+        { id: "0018", name: "Green Tea", gender: "female", type: "body-mist", price: 290, description: "A refreshing and clean fragrance with green tea, lemon, and mint.", imageUrl: "https://i.imgur.com/NMWgPfF.png" },
+        { id: "0019", name: "Omnia Amethyste", gender: "female", type: "eau-de-parfum", price: 1600, description: "A delicate floral fragrance with notes of iris, rose, and pomegranate.", imageUrl: "https://i.imgur.com/vNyEnpU.png" },
+        { id: "0020", name: "Light Blue", gender: "female", type: "eau-de-parfum", price: 1400, description: "A vibrant and refreshing fragrance with notes of Sicilian lemon, apple, and cedarwood.", imageUrl: "https://i.imgur.com/nC1jYpn.png" },
+        { id: "0021", name: "Bombshell", gender: "female", type: "body-mist", price: 350, description: "A floral and fruity fragrance with notes of purple passionfruit, Shangri-la peony, and vanilla orchid.", imageUrl: "https://i.imgur.com/Ps0Mme1.png" },
+        { id: "0022", name: "Bright Crystal", gender: "female", type: "eau-de-parfum", price: 1550, description: "A fresh, floral fragrance with peony, pomegranate, and lotus.", imageUrl: "https://i.imgur.com/I5ZArRs.png" },
+        { id: "0023", name: "Chance", gender: "female", type: "eau-de-parfum", price: 1650, description: "A sophisticated fragrance with notes of jasmine, rose, and patchouli.", imageUrl: "https://i.imgur.com/UjUVyEm.png" },
+        { id: "0024", name: "Cucumber Melon", gender: "female", type: "body-mist", price: 270, description: "A refreshing and light fragrance with cucumber and melon notes.", imageUrl: "https://i.imgur.com/QlChxuU.png" }
     ];
 
     const container = document.getElementById("all-products");
@@ -270,11 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             card.innerHTML = `
                 <a href="https://erriswheel.github.io/Product-Page/?id=${product.id}">
-                    <img src="https://i.imgur.com/FTRWYTr.png" alt="${product.name}">
+                    <img src="${product.imageUrl}" alt="${product.name}">
                     <p>${product.name}</p>
                     <span>₱${product.price}</span>
                 </a>
-                <button class="quick-add" data-id="${product.id}" title="Add to Cart">🛒</button
+                <button class="quick-add" data-id="${product.id}" title="Add to Cart">🛒</button>
             `;
             container.appendChild(card);
         });
