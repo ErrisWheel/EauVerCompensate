@@ -345,6 +345,11 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotal.textContent = total.toFixed(2);
     }
 
+    function toggleCartDropdown() {
+        cartDropdown.classList.toggle("hidden");
+        updateCartCount();
+    }
+    
     if (viewCartBtn) {
         viewCartBtn.addEventListener("click", toggleCartDropdown);
     }
