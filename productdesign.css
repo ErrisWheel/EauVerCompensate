@@ -132,7 +132,6 @@ header {
     margin-bottom: 6px;
 }
 
-/* match main page <p> styling for the dropdown */
 .cart-dropdown .cart-total {
     font-size: 1.5rem;
     font-weight: 500;
@@ -301,7 +300,6 @@ header {
     border-radius: 10px;
 }
 
-/* modal total stays white */
 #cart-total {
     text-align: right;
     font-size: 20px;
@@ -310,7 +308,6 @@ header {
     margin-top: 20px;
 }
 
-/* Override dropdown number color */
 .cart-dropdown .cart-total span#cart-total {
     color: #d4b28c;
 }
