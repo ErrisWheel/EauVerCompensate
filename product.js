@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById('checkout-btn').onclick = () => {
         
-          alert('Proceeding to checkout…');
+          document.getElementById('checkout-btn').onclick = showCheckoutModal;
           modal.style.display = 'none';
     };
 
@@ -175,3 +175,44 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 3000);
   }
+
+function showCheckoutModal() {
+  const cartModal = document.getElementById('cart-modal');
+  cartModal.style.display = 'none';
+
+  // checkout
+  const checkoutModal = document.getElementById('checkout-modal');
+  checkoutModal.style.display = 'block';
+
+  // calculate totals
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const orderTotal = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const shippingCost = 200; // flat PH rate
+  const grandTotal = orderTotal + shippingCost;
+
+  document.getElementById('checkout-order-total').textContent = orderTotal.toFixed(2);
+  document.getElementById('checkout-shipping').textContent = shippingCost.toFixed(2);
+  document.getElementById('checkout-grand-total').textContent = grandTotal.toFixed(2);
+
+  // tracking number
+  const trackingNo = 'EV' +
+    Date.now().toString().slice(-6) +
+    Math.floor(Math.random() * 1000).toString().padStart(3,'0');
+  document.getElementById('checkout-tracking-no').textContent = trackingNo;
+
+  document.getElementById('close-checkout-btn').onclick = () => {
+    checkoutModal.style.display = 'none';
+  };
+
+  // form submit
+  const form = document.getElementById('checkout-form');
+  form.onsubmit = e => {
+    e.preventDefault();
+    alert(
+      `Thank you, ${form['cust-name'].value}!\n` +
+      `Your order (₱${grandTotal.toFixed(2)}) has been placed.\n` +
+      `Tracking No: ${trackingNo}`
+    );
+    checkoutModal.style.display = 'none';
+  };
+}
