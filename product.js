@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
        document.getElementById('back-to-shop-btn').onclick = () => {
-          window.location.href = 'index.html';
+          window.location.href = 'https://erriswheel.github.io/EauVerCompensate/index.html';
     };
   }
   function updateCartCount() {
