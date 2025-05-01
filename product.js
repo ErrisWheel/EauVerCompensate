@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
           listEl.appendChild(li);
       });
-      totalEl.textContent = `₱${total.toFixed(2)}`;
+      totalEl.textContent = total.toFixed(2);
       document.querySelectorAll('.qty-increase').forEach(btn => {
           btn.addEventListener('click', e => {
               changeItemQuantity(e.target.dataset.id, +1);
