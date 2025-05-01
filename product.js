@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
          total += item.price * item.quantity;
          const li = document.createElement('li');
          li.innerHTML = `
+             <img class="cart-item-image" src="${item.imageUrl}" alt="${item.name}">
              <span class="item-name">${item.name}</span>
              <button class="qty-decrease" data-id="${item.id}">−</button>
              <span class="item-qty">${item.quantity}</span>
