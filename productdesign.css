@@ -321,7 +321,7 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90vw;
-  max-width: 400px;
+  max-width: 800px;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   border: 2px solid #d4b28c;
