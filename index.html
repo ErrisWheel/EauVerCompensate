@@ -137,6 +137,34 @@
     <section id="cart-page" class="hidden">
       </section>
 
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-btn" id="close-checkout-btn">&times;</span>
+          <h2>Checkout</h2>
+          <form id="checkout-form">
+            <label for="cust-name">Name:</label>
+            <input type="text" id="cust-name" name="cust-name" required />
+
+            <label for="cust-address">Address:</label>
+            <textarea id="cust-address" name="cust-address" rows="3" required></textarea>
+
+            <label for="cust-email">Email:</label>
+            <input type="email" id="cust-email" name="cust-email" required />
+
+            <label for="cust-phone">Phone:</label>
+            <input type="tel" id="cust-phone" name="cust-phone" required />
+    
+            <p>Order Total: ₱<span id="checkout-order-total">0.00</span></p>
+            <p>Shipping: ₱<span id="checkout-shipping">0.00</span></p>
+            <p>Grand Total: ₱<span id="checkout-grand-total">0.00</span></p>
+            <p>Tracking Number: <span id="checkout-tracking-no"></span></p>
+
+            <button type="submit" class="modal-btn">Place Order</button>
+          </form>
+        </div>
+      </div>
+    
     <div id="chatbot-container">
         <button id="chatbot-btn">💬</button>
         <div id="chatbot-box">
