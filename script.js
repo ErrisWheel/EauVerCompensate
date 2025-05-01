@@ -345,9 +345,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotal.textContent = total.toFixed(2);
     }
 
-    viewCartBtn.addEventListener("click", () => {
-        cartDropdown.classList.toggle("hidden");
-    });
+    if (viewCartBtn) {
+        viewCartBtn.addEventListener("click", toggleCartDropdown);
+    }
 
     function applyFilters() {
         const q = searchInput.value.toLowerCase();
