@@ -87,10 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById('checkout-btn').onclick = () => {
         
-          document.getElementById('checkout-btn').onclick = showCheckoutModal;
+          alert('Proceeding to checkout...');
           modal.style.display = 'none';
     };
-
+          document.getElementById('checkout-btn').onclick = showCheckoutModal;
 
        document.getElementById('back-to-shop-btn').onclick = () => {
           window.location.href = 'https://erriswheel.github.io/EauVerCompensate/index.html';
