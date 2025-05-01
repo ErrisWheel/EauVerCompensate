@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // ✅ Admin check and redirect
+            // Admin check n redirect
             if (
                 username.toLowerCase() === "admin" &&
                 email === "Admin" &&
