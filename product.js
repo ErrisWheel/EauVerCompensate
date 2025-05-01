@@ -23,121 +23,163 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: "0018", name: "Green Tea", gender: "female", type: "body-mist", price: 290, description: "A refreshing and clean fragrance with green tea, lemon, and mint.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F06", stock: 10 },
         { id: "0019", name: "Omnia Amethyste", gender: "female", type: "eau-de-parfum", price: 1600, description: "A delicate floral fragrance with notes of iris, rose, and pomegranate.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F07", stock: 10 },
         { id: "0020", name: "Light Blue", gender: "female", type: "eau-de-parfum", price: 1400, description: "A vibrant and refreshing fragrance with notes of Sicilian lemon, apple, and cedarwood.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F08", stock: 10 },
-        { id: "0021", name: "Bombshell", gender: "female", type: "body-mist", price: 350, description: "A floral and fruity fragrance with notes of purple passionfruit, Shangri-la peony, and vanilla orchid.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F09", stock: 10 },
+        { id: "0021", name: "Bombshell", gender: "female", type: "body-mist", price: 350, description: "A floral and fruity fragrance with notes of purple passionfruit, peony, and vanilla orchid.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F09", stock: 10 },
         { id: "0022", name: "Bright Crystal", gender: "female", type: "eau-de-parfum", price: 1550, description: "A fresh, floral fragrance with peony, pomegranate, and lotus.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F10", stock: 10 },
         { id: "0023", name: "Chance", gender: "female", type: "eau-de-parfum", price: 1650, description: "A sophisticated fragrance with notes of jasmine, rose, and patchouli.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F11", stock: 10 },
         { id: "0024", name: "Cucumber Melon", gender: "female", type: "body-mist", price: 270, description: "A refreshing and light fragrance with cucumber and melon notes.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F12", stock: 10 }
     ];
 
     const product = products.find(p => p.id === productId);
+    if (product) {
+        updateProductDetails(product);
+        document.getElementById('add-to-cart').addEventListener('click', () => {
+            addToCart(product);
+        });
+    } else {
+        showProductNotFound();
+    }
 
-        if (product) {
-            updateProductDetails(product);
-            document.getElementById('add-to-cart')
-                .addEventListener('click', () => addToCart(product));
-        } else {
-            showProductNotFound();
-        }
+    const cartBtn = document.getElementById('view-cart-btn');
+    if (cartBtn) {
+        cartBtn.addEventListener('click', toggleCartDropdown);
+    }
 
-        const cartBtn = document.getElementById('view-cart-btn');
-        if (cartBtn) {
-            cartBtn.addEventListener('click', toggleCartDropdown);
-        }
-        
-        updateCartCount();
+    document.querySelectorAll('.cart-view-link').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            showCartModal();
+        });
     });
 
-    function updateProductDetails(product) {
-        document.getElementById("product-name").textContent = product.name;
-        document.getElementById("product-price").textContent = `₱${product.price.toLocaleString()}`;
-        document.getElementById("product-description").textContent = product.description;
+    updateCartCount();
+});
 
-        const img = document.getElementById("product-image");
-        img.src = product.imageUrl;
-        img.onerror = () => { img.src = 'fallback-image.jpg'; };
-    }
+function toggleCartDropdown() {
+    const dropdown = document.getElementById('cart-dropdown');
+    dropdown.classList.toggle('hidden');
+    renderCartContents();
+}
 
-    function showProductNotFound() {
-        document.getElementById("product-name").textContent = "Product not found.";
-        document.getElementById("product-image").style.display = 'none';
-        document.getElementById("product-description").textContent = "Sorry, this product doesn't exist.";
-    }
+function showCartModal() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const tbody = document.getElementById('cart-items-modal');
+    const totalEl = document.getElementById('cart-total-modal');
 
-    function addToCart(product) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const idx = cart.findIndex(item => item.id === product.id);
+    tbody.innerHTML = '';
+    let total = 0;
 
-        if (idx === -1) {
-            cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
-            showToast(`${product.name} added to cart.`);
-        } else {
-            cart[idx].quantity += 1;
-            showToast(`Increased quantity of ${product.name}.`);
-        }
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><img src="${item.imageUrl}" width="50" alt="${item.name}" /></td>
+            <td>${item.name}</td>
+            <td>₱${item.price.toFixed(2)}</td>
+            <td>${item.quantity}</td>
+            <td>₱${subtotal.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+    });
 
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-        renderCartContents();
-    }
+    totalEl.textContent = `Total: ₱${total.toFixed(2)}`;
 
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        document.getElementById('cart-count').textContent = totalItems;
-    }
+    const modal = document.getElementById('cart-modal');
+    modal.style.display = 'block';
 
-    function changeItemQuantity(id, delta) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const idx = cart.findIndex(item => item.id === id);
+    document.getElementById('close-modal-btn').onclick = () => {
+        modal.style.display = 'none';
+    };
+}
 
-        if (idx !== -1 && cart[idx].quantity + delta > 0) {
-            cart[idx].quantity += delta;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            renderCartContents();
-            showToast(`${cart[idx].name} quantity updated.`);
-        }
-    }
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-count').textContent = totalItems;
+}
 
-    function renderCartContents() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const listEl = document.getElementById('cart-items');
-        const totalEl = document.getElementById('cart-total');
+function renderCartContents() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const listEl = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
 
-        listEl.innerHTML = '';
-        let total = 0;
+    listEl.innerHTML = '';
+    let total = 0;
 
-        cart.forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span class="item-name">${item.name}</span>
-                <button class="qty-decrease" data-id="${item.id}">−</button>
-                <span class="item-qty">${item.quantity}</span>
-                <button class="qty-increase" data-id="${item.id}">+</button>
-                <span class="item-subtotal">₱${(item.price * item.quantity).toFixed(2)}</span>
-            `;
-            listEl.appendChild(li);
-            total += item.price * item.quantity;
-        });
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span class="item-name">${item.name}</span>
+            <button class="qty-decrease" data-id="${item.id}">−</button>
+            <span class="item-qty">${item.quantity}</span>
+            <button class="qty-increase" data-id="${item.id}">+</button>
+            <span class="item-subtotal">₱${(item.price * item.quantity).toFixed(2)}</span>
+        `;
+        listEl.appendChild(li);
+    });
 
-        totalEl.textContent = total.toFixed(2);
+    totalEl.textContent = `₱${total.toFixed(2)}`;
 
-        document.querySelectorAll('.qty-increase').forEach(btn => {
-            btn.addEventListener('click', e => {
+    document.querySelectorAll('.qty-increase').forEach(btn => {
+        btn.addEventListener('click', e => {
             changeItemQuantity(e.target.dataset.id, +1);
-            });
         });
-        document.querySelectorAll('.qty-decrease').forEach(btn => {
-            btn.addEventListener('click', e => {
+    });
+    document.querySelectorAll('.qty-decrease').forEach(btn => {
+        btn.addEventListener('click', e => {
             changeItemQuantity(e.target.dataset.id, -1);
-            });
         });
+    });
+}
+
+function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const idx = cart.findIndex(i => i.id === product.id);
+
+    if (idx === -1) {
+        cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1, imageUrl: product.imageUrl });
+        showToast(`${product.name} added to cart.`);
+    } else {
+        cart[idx].quantity++;
+        showToast(`Increased quantity of ${product.name}.`);
     }
 
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.textContent = message;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
-    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCartContents();
+}
+
+function changeItemQuantity(id, delta) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const idx = cart.findIndex(i => i.id === id);
+    if (idx === -1) return;
+    cart[idx].quantity += delta;
+    if (cart[idx].quantity < 1) cart.splice(idx, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCartContents();
+}
+
+function updateProductDetails(product) {
+    document.getElementById("product-name").textContent = product.name;
+    document.getElementById("product-price").textContent = `₱${product.price.toLocaleString()}`;
+    document.getElementById("product-description").textContent = product.description;
+    const img = document.getElementById("product-image");
+    img.src = product.imageUrl;
+    img.onerror = () => img.src = 'fallback-image.jpg';
+}
+
+function showProductNotFound() {
+    document.getElementById("product-name").textContent = "Product not found.";
+    document.getElementById("product-image").style.display = 'none';
+    document.getElementById("product-description").textContent = "Sorry, this product doesn't exist.";
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
