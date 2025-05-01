@@ -1,30 +1,33 @@
+document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+      const products = [
 { id: "0001", name: "Apex", gender: "male", type: "eau-de-parfum", price: 1500, description: "A warm and spicy fragrance with notes of leather, mandarin, and nutmeg.", imageUrl: "https://drive.google.com/file/d/1bGsinQQ9Xd3Dmv0_Dz6PTYs-LHiF8TYo/view?usp=drive_link", sku: "M01", stock: 10 },
          
-{ id: "0002", name: "Ascent", gender: "male", type: "eau-de-parfum", price: 1300, description: "A dark and mysterious scent with hints of bergamot, vanilla, and musk.", imageUrl: "https://drive.google.com/file/d/1uVWGSj25CPpk5bdR9GdDyZaumjqSIUa7/view?usp=drive_link", sku: "M02", stock: 10 },
+ { id: "0002", name: "Ascent", gender: "male", type: "eau-de-parfum", price: 1300, description: "A dark and mysterious scent with hints of bergamot, vanilla, and musk.", imageUrl: "https://drive.google.com/file/d/1uVWGSj25CPpk5bdR9GdDyZaumjqSIUa7/view?usp=drive_link", sku: "M02", stock: 10 },
          
-{ id: "0003", name: "Dominion", gender: "male", type: "body-mist", price: 290, description: "A fresh and invigorating fragrance with a zesty citrus opening.", imageUrl: "https://drive.google.com/file/d/1UKaUrCQd-VDWYN12KSAmTVw1gjB4Rwn0/view?usp=drive_link", sku: "M03", stock: 10 },
+ { id: "0003", name: "Dominion", gender: "male", type: "body-mist", price: 290, description: "A fresh and invigorating fragrance with a zesty citrus opening.", imageUrl: "https://drive.google.com/file/d/1UKaUrCQd-VDWYN12KSAmTVw1gjB4Rwn0/view?usp=drive_link", sku: "M03", stock: 10 },
           
 { id: "0004", name: "Emberline", gender: "male", type: "eau-de-parfum", price: 1400, description: "A woody fragrance with notes of lavender, oak, and apple.", imageUrl: "https://drive.google.com/file/d/14KbwDVh8YeYyaD1CsDJ5JY2nxmxQ7OoP/view?usp=drive_link", sku: "M04", stock: 10 },
          
-{ id: "0005", name: "Forge", gender: "male", type: "eau-de-parfum", price: 1600, description: "A sophisticated scent with a mix of citrus, spices, and wood.", imageUrl: "https://drive.google.com/file/d/1WyDsqzHcxxdOPJZ_-KEvymmrukTLFYb3/view?usp=drive_link", sku: "M05", stock: 10 },
+ { id: "0005", name: "Forge", gender: "male", type: "eau-de-parfum", price: 1600, description: "A sophisticated scent with a mix of citrus, spices, and wood.", imageUrl: "https://drive.google.com/file/d/1WyDsqzHcxxdOPJZ_-KEvymmrukTLFYb3/view?usp=drive_link", sku: "M05", stock: 10 },
          
-{ id: "0006", name: "Halo Steel", gender: "male", type: "body-mist", price: 280, description: "A refreshing, unisex fragrance with notes of green tea, papaya, and bergamot.", imageUrl: "https://drive.google.com/file/d/1AHDF2a_LTxfZqD-53cQ8Q5q0X86NuQe9/view?usp=drive_link", sku: "M06", stock: 10 },
+ { id: "0006", name: "Halo Steel", gender: "male", type: "body-mist", price: 280, description: "A refreshing, unisex fragrance with notes of green tea, papaya, and bergamot.", imageUrl: "https://drive.google.com/file/d/1AHDF2a_LTxfZqD-53cQ8Q5q0X86NuQe9/view?usp=drive_link", sku: "M06", stock: 10 },
          
-{ id: "0007", name: "Iron Drift", gender: "male", type: "eau-de-parfum", price: 1300, description: "A clean and aquatic scent with refreshing notes of mint, lavender, and sandalwood.", imageUrl: "https://drive.google.com/file/d/1ZuLONSpNCa9Hapevo9IYyfS-1ybbdSex/view?usp=drive_link", sku: "M07", stock: 10 },
+ { id: "0007", name: "Iron Drift", gender: "male", type: "eau-de-parfum", price: 1300, description: "A clean and aquatic scent with refreshing notes of mint, lavender, and sandalwood.", imageUrl: "https://drive.google.com/file/d/1ZuLONSpNCa9Hapevo9IYyfS-1ybbdSex/view?usp=drive_link", sku: "M07", stock: 10 },
          
-{ id: "0008", name: "Lucent ash", gender: "male", type: "eau-de-parfum", price: 1500, description: "A fresh and aquatic fragrance with notes of cucumber, citrus, and sandalwood.", imageUrl: "https://drive.google.com/file/d/1-nw9e91k9E3J7S0wNFeqcDXMc2lSDGoz/view?usp=drive_link", sku: "M08", stock: 10 },
+ { id: "0008", name: "Lucent ash", gender: "male", type: "eau-de-parfum", price: 1500, description: "A fresh and aquatic fragrance with notes of cucumber, citrus, and sandalwood.", imageUrl: "https://drive.google.com/file/d/1-nw9e91k9E3J7S0wNFeqcDXMc2lSDGoz/view?usp=drive_link", sku: "M08", stock: 10 },
          
-{ id: "0009", name: "Monsoon", gender: "male", type: "eau-de-parfum", price: 1700, description: "A classic aquatic fragrance with notes of jasmine, rosemary, and citrus.", imageUrl: "https://drive.google.com/file/d/1CoXLaH-QvQvzK8meKGM1K5GSog2xX5NC/view?usp=drive_link", sku: "M09", stock: 10 },
+ { id: "0009", name: "Monsoon", gender: "male", type: "eau-de-parfum", price: 1700, description: "A classic aquatic fragrance with notes of jasmine, rosemary, and citrus.", imageUrl: "https://drive.google.com/file/d/1CoXLaH-QvQvzK8meKGM1K5GSog2xX5NC/view?usp=drive_link", sku: "M09", stock: 10 },
          
-{ id: "0010", name: "Noir Brave", gender: "male", type: "eau-de-parfum", price: 1850, description: "A bold fragrance with a blend of pineapple, birch, and musk.", imageUrl: "https://drive.google.com/file/d/1DOTbf3cRKS3O070ccCX-41QI8AvfM6dV/view?usp=drive_link", sku: "M10", stock: 10 },
+ { id: "0010", name: "Noir Brave", gender: "male", type: "eau-de-parfum", price: 1850, description: "A bold fragrance with a blend of pineapple, birch, and musk.", imageUrl: "https://drive.google.com/file/d/1DOTbf3cRKS3O070ccCX-41QI8AvfM6dV/view?usp=drive_link", sku: "M10", stock: 10 },
          
-{ id: "0011", name: "Pulse", gender: "male", type: "body-mist", price: 300, description: "A simple and fresh scent with citrus notes and light florals.", imageUrl: "https://drive.google.com/file/d/1xeNIfdw9JiTVYS1N7CIdrk4K3lwcxBa_/view?usp=drive_link", sku: "M11", stock: 10 },
+ { id: "0011", name: "Pulse", gender: "male", type: "body-mist", price: 300, description: "A simple and fresh scent with citrus notes and light florals.", imageUrl: "https://drive.google.com/file/d/1xeNIfdw9JiTVYS1N7CIdrk4K3lwcxBa_/view?usp=drive_link", sku: "M11", stock: 10 },
          
-{ id: "0012", name: "Quarry", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://drive.google.com/file/d/1cw9_lTYELKT_0qFhTNoBDvAfuEh64-f5/view?usp=drive_link", sku: "M12", stock: 10 },
- 
-{ id: "0013", name: "Shade", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://drive.google.com/file/d/12Ltxu23TzFz71_Nva4nY1bCoGkqO49aS/view?usp=drive_link", sku: "M13", stock: 10 },          
- 
-{ id: "0014", name: "Vantage", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://drive.google.com/file/d/1Jv2KoIr6s2hIV3s6jWC2fDQlAZxyTCw0/view?usp=drive_link", sku: "M14", stock: 10 }, 
+ { id: "0012", name: "Quarry", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://drive.google.com/file/d/1cw9_lTYELKT_0qFhTNoBDvAfuEh64-f5/view?usp=drive_link", sku: "M12", stock: 10 },
+ { id: "0013", name: "Shade", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://drive.google.com/file/d/12Ltxu23TzFz71_Nva4nY1bCoGkqO49aS/view?usp=drive_link", sku: "M13", stock: 10 },          
+ { id: "0014", name: "Vantage", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://drive.google.com/file/d/1Jv2KoIr6s2hIV3s6jWC2fDQlAZxyTCw0/view?usp=drive_link", sku: "M14", stock: 10 }, 
 
 { id: "0015", name: "Volt", gender: "male", type: "eau-de-parfum", price: 1550, description: "A fresh and citrusy fragrance with hints of mandarin, neroli, and patchouli.", imageUrl: "https://drive.google.com/file/d/1B92bjhztpfkNN-lNse9ABBvXkqZKSubj/view?usp=drive_link", sku: "M15", stock: 10 },
 
+      ];
