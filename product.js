@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
        document.getElementById('back-to-shop-btn').onclick = () => {
-          modal.style.display = 'none';
+          window.location.href = 'index.html';
     };
   }
   function updateCartCount() {
