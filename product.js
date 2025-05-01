@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showProductNotFound();
         }
 
-    // Toggle dropdown & render whenever you click the cart button
         document.getElementById('view-cart-btn')
                 .addEventListener('click', () => {
             const dropdown = document.getElementById('cart-dropdown');
@@ -47,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCartContents();
         });
 
-    // Initialize the little badge count
         updateCartCount();
     });
 
@@ -124,10 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
             total += item.price * item.quantity;
         });
 
-    // **Only the number** goes in the span — “₱” is in the HTML around it
         totalEl.textContent = total.toFixed(2);
 
-    // Wire up the +/− buttons
         document.querySelectorAll('.qty-increase').forEach(btn => {
             btn.addEventListener('click', e => {
             changeItemQuantity(e.target.dataset.id, +1);
