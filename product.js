@@ -34,10 +34,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         showProductNotFound();
     }
+    document.getElementById('view-cart-btn')
+        .addEventListener('click', () => {
+            const dropdown = document.getElementById('cart-dropdown');
+            dropdown.classList.toggle('hidden');
+            renderCartContents();
+        });
+
     const cartBtn = document.getElementById('view-cart-btn');
     if (cartBtn) {
         cartBtn.addEventListener('click', toggleCartDropdown);
     }
+
     document.querySelectorAll('.cart-view-link').forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
