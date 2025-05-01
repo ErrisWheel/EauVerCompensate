@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 password === "Admin"
             ) {
                 alert("Welcome, Admin!");
-                window.location.href = "https://erriswheel.github.io/Admin-Page/";
+                window.location.href = "https://erriswheel.github.io/EauVerCompensate/admin";
                 return;
             }
 
