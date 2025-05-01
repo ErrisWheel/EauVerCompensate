@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
+    const urlParams = new URLSearchParams(window.location.search)
+    const productId = urlParams.get('id')
     const products = [
         { id: "0001", name: "Fahrenheit", gender: "male", type: "eau-de-parfum", price: 1500, description: "A warm and spicy fragrance with notes of leather, mandarin, and nutmeg.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "M01", stock: 10 },
         { id: "0002", name: "Noir", gender: "male", type: "eau-de-parfum", price: 1300, description: "A dark and mysterious scent with hints of bergamot, vanilla, and musk.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "M02", stock: 10 },
@@ -22,150 +22,137 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: "0018", name: "Green Tea", gender: "female", type: "body-mist", price: 290, description: "A refreshing and clean fragrance with green tea, lemon, and mint.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F06", stock: 10 },
         { id: "0019", name: "Omnia Amethyste", gender: "female", type: "eau-de-parfum", price: 1600, description: "A delicate floral fragrance with notes of iris, rose, and pomegranate.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F07", stock: 10 },
         { id: "0020", name: "Light Blue", gender: "female", type: "eau-de-parfum", price: 1400, description: "A vibrant and refreshing fragrance with notes of Sicilian lemon, apple, and cedarwood.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F08", stock: 10 },
-        { id: "0021", name: "Bombshell", gender: "female", type: "body-mist", price: 350, description: "A floral and fruity fragrance with notes of purple passionfruit, peony, and vanilla orchid.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F09", stock: 10 },
+        { id: "0021", name: "Bombshell", gender: "female", type: "body-mist", price: 350, description: "A floral and fruity fragrance with notes of purple passionfruit, Shangri-la peony, and vanilla orchid.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F09", stock: 10 },
         { id: "0022", name: "Bright Crystal", gender: "female", type: "eau-de-parfum", price: 1550, description: "A fresh, floral fragrance with peony, pomegranate, and lotus.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F10", stock: 10 },
         { id: "0023", name: "Chance", gender: "female", type: "eau-de-parfum", price: 1650, description: "A sophisticated fragrance with notes of jasmine, rose, and patchouli.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F11", stock: 10 },
         { id: "0024", name: "Cucumber Melon", gender: "female", type: "body-mist", price: 270, description: "A refreshing and light fragrance with cucumber and melon notes.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F12", stock: 10 }
-    ];
-    const product = products.find(p => p.id === productId);
+    ]
+    const product = products.find(p => p.id === productId)
     if (product) {
-        updateProductDetails(product);
-        document.getElementById('add-to-cart').addEventListener('click', () => addToCart(product));
+        updateProductDetails(product)
+        document.getElementById('add-to-cart').addEventListener('click', () => addToCart(product))
     } else {
-        showProductNotFound();
+        showProductNotFound()
     }
-    document.getElementById('view-cart-btn')
-        .addEventListener('click', () => {
-            const dropdown = document.getElementById('cart-dropdown');
-            dropdown.classList.toggle('hidden');
-            renderCartContents();
-        });
-
-    const cartBtn = document.getElementById('view-cart-btn');
-    if (cartBtn) {
-        cartBtn.addEventListener('click', toggleCartDropdown);
-    }
-
+    document.getElementById('view-cart-btn').addEventListener('click', () => {
+        const dropdown = document.getElementById('cart-dropdown')
+        dropdown.classList.toggle('hidden')
+        renderCartContents()
+    })
+    const cartBtn = document.getElementById('view-cart-btn')
+    if (cartBtn) cartBtn.addEventListener('click', toggleCartDropdown)
     document.querySelectorAll('.cart-view-link').forEach(link => {
         link.addEventListener('click', e => {
-            e.preventDefault();
-            showCartModal();
-        });
-    });
-    updateCartCount();
-});
+            e.preventDefault()
+            showCartModal()
+        })
+    })
+    updateCartCount()
+})
 function toggleCartDropdown() {
-    const dropdown = document.getElementById('cart-dropdown');
-    dropdown.classList.toggle('hidden');
-    renderCartContents();
+    const dropdown = document.getElementById('cart-dropdown')
+    dropdown.classList.toggle('hidden')
+    renderCartContents()
 }
 function showCartModal() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const tbody = document.getElementById('cart-items-modal');
-    const totalEl = document.getElementById('cart-total-modal');
-    tbody.innerHTML = '';
-    let total = 0;
-
+    const cart = JSON.parse(localStorage.getItem('cart')) || []
+    const tbody = document.getElementById('cart-items-modal')
+    const totalEl = document.getElementById('cart-total-modal')
+    tbody.innerHTML = ''
+    let total = 0
     cart.forEach(item => {
-        const prod = products.find(p => p.id === item.id);
-        const subtotal = prod.price * item.quantity;
-        total += subtotal;
-
-        const tr = document.createElement('tr');
+        const prod = products.find(p => p.id === item.id)
+        const subtotal = prod.price * item.quantity
+        total += subtotal
+        const tr = document.createElement('tr')
         tr.innerHTML = `
             <td><img src="${prod.imageUrl}" width="50" alt="${prod.name}"></td>
             <td>${prod.name}</td>
             <td>₱${prod.price.toFixed(2)}</td>
             <td>${item.quantity}</td>
             <td>₱${subtotal.toFixed(2)}</td>
-        `;
-        tbody.appendChild(tr);
-    });
-
-    totalEl.textContent = `Total: ₱${total.toFixed(2)}`;
-
-    const modal = document.getElementById('cart-modal');
-    modal.style.display = 'block';
+        `
+        tbody.appendChild(tr)
+    })
+    totalEl.textContent = `Total: ₱${total.toFixed(2)}`
+    const modal = document.getElementById('cart-modal')
+    modal.classList.remove('hidden')
+    modal.style.display = 'block'
     document.getElementById('close-modal-btn').onclick = () => {
-        modal.style.display = 'none';
-    };
+        modal.style.display = 'none'
+        modal.classList.add('hidden')
+    }
 }
 function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById('cart-count').textContent = totalItems;
+    const cart = JSON.parse(localStorage.getItem('cart')) || []
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
+    document.getElementById('cart-count').textContent = totalItems
 }
 function renderCartContents() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const listEl = document.getElementById('cart-items');
-    const totalEl = document.getElementById('cart-total');
-    listEl.innerHTML = '';
-    let total = 0;
+    const cart = JSON.parse(localStorage.getItem('cart')) || []
+    const listEl = document.getElementById('cart-items')
+    const totalEl = document.getElementById('cart-total')
+    listEl.innerHTML = ''
+    let total = 0
     cart.forEach(item => {
-        total += item.price * item.quantity;
-        const li = document.createElement('li');
+        total += item.price * item.quantity
+        const li = document.createElement('li')
         li.innerHTML = `
             <span class="item-name">${item.name}</span>
             <button class="qty-decrease" data-id="${item.id}">−</button>
             <span class="item-qty">${item.quantity}</span>
             <button class="qty-increase" data-id="${item.id}">+</button>
             <span class="item-subtotal">₱${(item.price * item.quantity).toFixed(2)}</span>
-        `;
-        listEl.appendChild(li);
-    });
-    totalEl.textContent = `₱${total.toFixed(2)}`;
+        `
+        listEl.appendChild(li)
+    })
+    totalEl.textContent = `₱${total.toFixed(2)}`
     document.querySelectorAll('.qty-increase').forEach(btn => {
-        btn.addEventListener('click', e => {
-            changeItemQuantity(e.target.dataset.id, +1);
-        });
-    });
+        btn.addEventListener('click', e => changeItemQuantity(e.target.dataset.id, +1))
+    })
     document.querySelectorAll('.qty-decrease').forEach(btn => {
-        btn.addEventListener('click', e => {
-            changeItemQuantity(e.target.dataset.id, -1);
-        });
-    });
+        btn.addEventListener('click', e => changeItemQuantity(e.target.dataset.id, -1))
+    })
 }
 function addToCart(product) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const idx = cart.findIndex(i => i.id === product.id);
+    let cart = JSON.parse(localStorage.getItem('cart')) || []
+    const idx = cart.findIndex(i => i.id === product.id)
     if (idx === -1) {
-        cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1, imageUrl: product.imageUrl });
-        showToast(`${product.name} added to cart.`);
+        cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 })
     } else {
-        cart[idx].quantity++;
-        showToast(`Increased quantity of ${product.name}.`);
+        cart[idx].quantity++
     }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    renderCartContents();
+    localStorage.setItem('cart', JSON.stringify(cart))
+    updateCartCount()
+    renderCartContents()
 }
 function changeItemQuantity(id, delta) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const idx = cart.findIndex(i => i.id === id);
-    if (idx === -1) return;
-    cart[idx].quantity += delta;
-    if (cart[idx].quantity < 1) cart.splice(idx, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    renderCartContents();
+    let cart = JSON.parse(localStorage.getItem('cart')) || []
+    const idx = cart.findIndex(i => i.id === id)
+    if (idx === -1) return
+    cart[idx].quantity += delta
+    if (cart[idx].quantity < 1) cart.splice(idx, 1)
+    localStorage.setItem('cart', JSON.stringify(cart))
+    updateCartCount()
+    renderCartContents()
 }
 function updateProductDetails(product) {
-    document.getElementById("product-name").textContent = product.name;
-    document.getElementById("product-price").textContent = `₱${product.price.toLocaleString()}`;
-    document.getElementById("product-description").textContent = product.description;
-    const img = document.getElementById("product-image");
-    img.src = product.imageUrl;
-    img.onerror = () => img.src = 'fallback-image.jpg';
+    document.getElementById("product-name").textContent = product.name
+    document.getElementById("product-price").textContent = `₱${product.price.toLocaleString()}`
+    document.getElementById("product-description").textContent = product.description
+    const img = document.getElementById("product-image")
+    img.src = product.imageUrl
+    img.onerror = () => img.src = 'fallback-image.jpg'
 }
 function showProductNotFound() {
-    document.getElementById("product-name").textContent = "Product not found.";
-    document.getElementById("product-image").style.display = 'none';
-    document.getElementById("product-description").textContent = "Sorry, this product doesn't exist.";
+    document.getElementById("product-name").textContent = "Product not found."
+    document.getElementById("product-image").style.display = 'none'
+    document.getElementById("product-description").textContent = "Sorry, this product doesn't exist."
 }
 function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
+    const toast = document.createElement('div')
+    toast.className = 'toast'
+    toast.textContent = message
+    document.body.appendChild(toast)
+    setTimeout(() => toast.remove(), 3000)
 }
