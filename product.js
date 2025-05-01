@@ -181,8 +181,15 @@ function showCheckoutModal() {
   cartModal.style.display = 'none';
 
   // checkout
-  const checkoutModal = document.getElementById('checkout-modal');
-  checkoutModal.style.display = 'block';
+  document.getElementById('checkout-btn').addEventListener('click', () => {
+    const checkoutModal = document.getElementById('checkout-modal');
+    checkoutModal.classList.add('show');
+  });
+      
+  document.getElementById('close-checkout-btn').addEventListener('click', () => {
+    const checkoutModal = document.getElementById('checkout-modal');
+    checkoutModal.classList.remove('show');
+  });
 
   // calculate totals
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
