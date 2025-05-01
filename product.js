@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
-
     const products = [
         { id: "0001", name: "Fahrenheit", gender: "male", type: "eau-de-parfum", price: 1500, description: "A warm and spicy fragrance with notes of leather, mandarin, and nutmeg.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "M01", stock: 10 },
         { id: "0002", name: "Noir", gender: "male", type: "eau-de-parfum", price: 1300, description: "A dark and mysterious scent with hints of bergamot, vanilla, and musk.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "M02", stock: 10 },
@@ -28,52 +27,42 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: "0023", name: "Chance", gender: "female", type: "eau-de-parfum", price: 1650, description: "A sophisticated fragrance with notes of jasmine, rose, and patchouli.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F11", stock: 10 },
         { id: "0024", name: "Cucumber Melon", gender: "female", type: "body-mist", price: 270, description: "A refreshing and light fragrance with cucumber and melon notes.", imageUrl: "https://i.imgur.com/FTRWYTr.png", sku: "F12", stock: 10 }
     ];
-
     const product = products.find(p => p.id === productId);
     if (product) {
         updateProductDetails(product);
-        document.getElementById('add-to-cart').addEventListener('click', () => {
-            addToCart(product);
-        });
+        document.getElementById('add-to-cart').addEventListener('click', () => addToCart(product));
     } else {
         showProductNotFound();
     }
-
     const cartBtn = document.getElementById('view-cart-btn');
     if (cartBtn) {
         cartBtn.addEventListener('click', toggleCartDropdown);
     }
-
     document.querySelectorAll('.cart-view-link').forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
             showCartModal();
         });
     });
-
     updateCartCount();
 });
-
 function toggleCartDropdown() {
     const dropdown = document.getElementById('cart-dropdown');
     dropdown.classList.toggle('hidden');
     renderCartContents();
 }
-
 function showCartModal() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const tbody = document.getElementById('cart-items-modal');
     const totalEl = document.getElementById('cart-total-modal');
-
     tbody.innerHTML = '';
     let total = 0;
-
     cart.forEach(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><img src="${item.imageUrl}" width="50" alt="${item.name}" /></td>
+            <td><img src="${item.imageUrl}" width="50" alt="${item.name}"></td>
             <td>${item.name}</td>
             <td>₱${item.price.toFixed(2)}</td>
             <td>${item.quantity}</td>
@@ -81,31 +70,24 @@ function showCartModal() {
         `;
         tbody.appendChild(tr);
     });
-
     totalEl.textContent = `Total: ₱${total.toFixed(2)}`;
-
     const modal = document.getElementById('cart-modal');
     modal.style.display = 'block';
-
     document.getElementById('close-modal-btn').onclick = () => {
         modal.style.display = 'none';
     };
 }
-
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById('cart-count').textContent = totalItems;
 }
-
 function renderCartContents() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const listEl = document.getElementById('cart-items');
     const totalEl = document.getElementById('cart-total');
-
     listEl.innerHTML = '';
     let total = 0;
-
     cart.forEach(item => {
         total += item.price * item.quantity;
         const li = document.createElement('li');
@@ -118,9 +100,7 @@ function renderCartContents() {
         `;
         listEl.appendChild(li);
     });
-
     totalEl.textContent = `₱${total.toFixed(2)}`;
-
     document.querySelectorAll('.qty-increase').forEach(btn => {
         btn.addEventListener('click', e => {
             changeItemQuantity(e.target.dataset.id, +1);
@@ -132,11 +112,9 @@ function renderCartContents() {
         });
     });
 }
-
 function addToCart(product) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const idx = cart.findIndex(i => i.id === product.id);
-
     if (idx === -1) {
         cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1, imageUrl: product.imageUrl });
         showToast(`${product.name} added to cart.`);
@@ -144,12 +122,10 @@ function addToCart(product) {
         cart[idx].quantity++;
         showToast(`Increased quantity of ${product.name}.`);
     }
-
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     renderCartContents();
 }
-
 function changeItemQuantity(id, delta) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const idx = cart.findIndex(i => i.id === id);
@@ -160,7 +136,6 @@ function changeItemQuantity(id, delta) {
     updateCartCount();
     renderCartContents();
 }
-
 function updateProductDetails(product) {
     document.getElementById("product-name").textContent = product.name;
     document.getElementById("product-price").textContent = `₱${product.price.toLocaleString()}`;
@@ -169,13 +144,11 @@ function updateProductDetails(product) {
     img.src = product.imageUrl;
     img.onerror = () => img.src = 'fallback-image.jpg';
 }
-
 function showProductNotFound() {
     document.getElementById("product-name").textContent = "Product not found.";
     document.getElementById("product-image").style.display = 'none';
     document.getElementById("product-description").textContent = "Sorry, this product doesn't exist.";
 }
-
 function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast';
