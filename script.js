@@ -91,15 +91,15 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const profileBtn = document.querySelector(".profile-btn");
     const loginPrompt = document.getElementById("login-prompt");
-    const closeBtn    = document.querySelector(".close-btn");
-    const loginBtn    = document.getElementById("login-btn");
-    const signupBtn   = document.getElementById("signup-btn");
-    const forgotBtn   = document.getElementById("forgot-btn");
+    const closeBtn = document.querySelector(".close-btn");
+    const loginBtn = document.getElementById("login-btn");
+    const signupBtn = document.getElementById("signup-btn");
+    const forgotBtn = document.getElementById("forgot-btn");
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser && storedUser.rememberMe) {
-        document.getElementById("username").value   = storedUser.username;
-        document.getElementById("email").value      = storedUser.email;
+        document.getElementById("username").value = storedUser.username;
+        document.getElementById("email").value = storedUser.email;
         document.getElementById("rememberMe").checked = true;
     }
 
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loginPrompt.style.display = "block";
         });
     }
+
     if (closeBtn && loginPrompt) {
         closeBtn.addEventListener("click", () => {
             loginPrompt.style.display = "none";
@@ -116,9 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (loginBtn) {
         loginBtn.addEventListener("click", () => {
-            const username   = document.getElementById("username").value;
-            const email      = document.getElementById("email").value;
-            const password   = document.getElementById("password").value;
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
             const rememberMe = document.getElementById("rememberMe").checked;
 
             if (!email || !password) {
@@ -126,6 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            // ✅ ADMIN LOGIN CHECK
+            if (username === "admin" && password === "admin") {
+                alert("Welcome Admin!");
+                window.location.href = "https://erriswheel.github.io/Admin-Page/";
+                return; // stop further execution
+            }
+
+            // Normal user login (simulated)
             console.log(
                 `Login Attempt: Username: ${username}, Email: ${email}, Password: ${password}, Remember Me: ${rememberMe}`
             );
@@ -148,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "signup.html";
         });
     }
+
     if (forgotBtn) {
         forgotBtn.addEventListener("click", () => {
             alert("Redirecting to Forgot Password...");
