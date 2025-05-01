@@ -394,70 +394,99 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function showCartPage() {
-        const cartPageSection = document.getElementById("cart-page");
-        const productSection  = document.querySelector(".product-section");
-        if (cartDropdown) cartDropdown.classList.add("hidden");
-        if (productSection) productSection.classList.add("hidden");
+function showCartPage() {
+    const cartPageSection = document.getElementById("cart-page");
+    const productSection  = document.querySelector(".product-section");
+    if (cartDropdown) cartDropdown.classList.add("hidden");
+    if (productSection) productSection.classList.add("hidden");
 
-        if (!cartPageSection) return;
-        cartPageSection.innerHTML = "";
-        cartPageSection.style.display = "block";
-        cartPageSection.classList.remove("hidden");
+    if (!cartPageSection) return;
+    cartPageSection.innerHTML = "";
+    cartPageSection.style.display = "block";
+    cartPageSection.classList.remove("hidden");
 
-        let html = `
-          <h2>Your Cart</h2>
-          <table class="cart-table">
-            <thead>
-              <tr>
-                <th>Photo</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Stock</th>
-                <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-        `;
-        let totalCost = 0;
-        cart.forEach(item => {
-            const prod = products.find(p => p.id === item.id);
-            const subtotal = prod.price * item.quantity;
-            totalCost += subtotal;
-            html += `
-              <tr>
-                <td><img src="${prod.imageUrl}" alt="${prod.name}" width="50"></td>
-                <td>${prod.name}</td>
-                <td>₱${prod.price.toFixed(2)}</td>
-                <td>${item.quantity}</td>
-                <td>${prod.stock}</td>
-                <td>₱${subtotal.toFixed(2)}</td>
-              </tr>
-            `;
-        });
+    let html = `
+      <h2>Your Cart</h2>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Stock</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    let totalCost = 0;
+    cart.forEach(item => {
+        const prod = products.find(p => p.id === item.id);
+        const subtotal = prod.price * item.quantity;
+        totalCost += subtotal;
         html += `
-            </tbody>
-          </table>
-          <p class="cart-total-amount">Total: ₱${totalCost.toFixed(2)}</p>
-          <button id="checkout-btn">Checkout</button>
-          <button id="close-cart-btn">Back to Shop</button>
+          <tr>
+            <td><img src="${prod.imageUrl}" alt="${prod.name}" width="50"></td>
+            <td>${prod.name}</td>
+            <td>₱${prod.price.toFixed(2)}</td>
+            <td>${item.quantity}</td>
+            <td>${prod.stock}</td>
+            <td>₱${subtotal.toFixed(2)}</td>
+          </tr>
         `;
-        cartPageSection.innerHTML = html;
+    });
+    html += `
+        </tbody>
+      </table>
+      <p class="cart-total-amount">Total: ₱${totalCost.toFixed(2)}</p>
+      <button id="checkout-btn">Checkout</button>
+      <button id="close-cart-btn">Back to Shop</button>
+    `;
+    cartPageSection.innerHTML = html;
 
-        const closeBtn = document.getElementById("close-cart-btn");
-        const checkoutBtn = document.getElementById("checkout-btn");
-        if (closeBtn) {
-            closeBtn.addEventListener("click", () => {
-                cartPageSection.style.display = "none";
-                if (productSection) productSection.classList.remove("hidden");
-            });
-        }
-        if (checkoutBtn) {
-            checkoutBtn.addEventListener("click", () => {
-                cartPageSection.style.display = "none";
-                if (productSection) productSection.classList.remove("hidden");
-            });
-        }
+    const closeBtn = document.getElementById("close-cart-btn");
+    const checkoutBtn = document.getElementById("checkout-btn");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            cartPageSection.style.display = "none";
+            if (productSection) productSection.classList.remove("hidden");
+        });
     }
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", () => {
+            cartPageSection.style.display = "none";
+            if (productSection) productSection.classList.remove("hidden");
+        });
+    }
+}
+
+document.getElementById('checkout-btn').addEventListener('click', () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    let shipping = 200;
+    let grandTotal = total + shipping;
+    let trackingNo = 'TRK-' + Math.floor(100000 + Math.random() * 900000);
+
+    document.getElementById('checkout-order-total').textContent = total.toFixed(2);
+    document.getElementById('checkout-shipping').textContent = shipping.toFixed(2);
+    document.getElementById('checkout-grand-total').textContent = grandTotal.toFixed(2);
+    document.getElementById('checkout-tracking-no').textContent = trackingNo;
+
+    const modal = document.getElementById('checkout-modal');
+    modal.classList.remove('hidden');
+});
+
+document.getElementById('close-checkout-btn').addEventListener('click', () => {
+    document.getElementById('checkout-modal').classList.add('hidden');
+});
+
+document.getElementById('checkout-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Order placed successfully!');
+    localStorage.removeItem('cart');
+    document.getElementById('checkout-modal').classList.add('hidden');
+    updateCartCount();
+});
+
 });
