@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details</title>
+  <link rel="stylesheet" href="productdesign.css" />
+</head>
+<body>
+  <header>
+    <a href="https://erriswheel.github.io/EauVerCompensate/" class="back-btn">← Back</a>
+    <h2 class="header-title">Product Details</h2>
+
+    <div class="cart-container">
+      <button id="view-cart-btn" class="cart-btn">
+        🛒 <span id="cart-count">0</span>
+      </button>
+      <div id="cart-dropdown" class="cart-dropdown hidden">
+        <ul id="cart-items"></ul>
+        <p class="cart-total">
+          Total: ₱<span id="cart-total">0.00</span>
+        </p>
+        <a href="#" class="cart-view-link">Go to Cart</a>
+      </div>
+    </div>
+
+    <button class="profile-btn">
+      <img src="https://png.pngtree.com/recommend-works/png-clipart/20241204/ourmid/pngtree-profile-button-game-ui-png-image_14604633.png"
+           alt="Profile" />
+    </button>
+  </header>
+
+  <main>
+    <section id="product-details">
+      <div class="product-image">
+        <img id="product-image" src="" alt="Product Image" />
+      </div>
+      <div class="product-info">
+        <h1 id="product-name">Product Name</h1>
+        <p class="product-description" id="product-description">
+          This is a short product description.
+        </p>
+        <p class="product-price">
+          Price: <span id="product-price">₱0.00</span>
+        </p>
+        <button id="add-to-cart" class="add-to-cart-btn">Add to Cart</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Removed the duplicate cart-dropdown here -->
+
+  <div id="toast" class="toast hidden">
+    <p id="toast-message">Item added to cart!</p>
+  </div>
+
+  <div id="cart-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal-btn">&times;</span>
+      <h2>Your Cart</h2>
+      <table id="cart-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items-modal"></tbody>
+      </table>
+      <h3 id="cart-total-modal">Total: ₱0</h3>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Eau Ver Compensate. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Fixed stray '+' and script order -->
+  <script src="cart.js"></script>
+  <script src="product.js"></script>
+</body>
+</html>
