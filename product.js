@@ -65,20 +65,25 @@ function showCartModal() {
     const totalEl = document.getElementById('cart-total-modal');
     tbody.innerHTML = '';
     let total = 0;
+
     cart.forEach(item => {
-        const subtotal = item.price * item.quantity;
+        const prod = products.find(p => p.id === item.id);
+        const subtotal = prod.price * item.quantity;
         total += subtotal;
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><img src="${item.imageUrl}" width="50" alt="${item.name}"></td>
-            <td>${item.name}</td>
-            <td>₱${item.price.toFixed(2)}</td>
+            <td><img src="${prod.imageUrl}" width="50" alt="${prod.name}"></td>
+            <td>${prod.name}</td>
+            <td>₱${prod.price.toFixed(2)}</td>
             <td>${item.quantity}</td>
             <td>₱${subtotal.toFixed(2)}</td>
         `;
         tbody.appendChild(tr);
     });
+
     totalEl.textContent = `Total: ₱${total.toFixed(2)}`;
+
     const modal = document.getElementById('cart-modal');
     modal.style.display = 'block';
     document.getElementById('close-modal-btn').onclick = () => {
