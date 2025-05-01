@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.setAttribute("data-price", product.price);
 
             card.innerHTML = `
-                <a href="https://erriswheel.github.io/Product-Page/?id=${product.id}">
+                <a href="product.html?id=${product.id}">
                     <img src="${product.imageUrl}" alt="${product.name}">
                     <p>${product.name}</p>
                     <span>₱${product.price}</span>
