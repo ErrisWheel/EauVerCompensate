@@ -84,6 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('close-modal-btn').onclick = () => {
           modal.style.display = 'none';
       };
+
+      document.getElementById('checkout-btn').onclick = () => {
+        
+          alert('Proceeding to checkout…');
+          modal.style.display = 'none';
+    };
+
+
+       document.getElementById('back-to-shop-btn').onclick = () => {
+          modal.style.display = 'none';
+    };
   }
   function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
