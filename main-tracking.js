@@ -21,5 +21,5 @@ document.getElementById("cashout-form").addEventListener("submit", function(e) {
   localStorage.setItem("orders", JSON.stringify(orders));
 
   alert("Order placed successfully!");
-  // Optionally redirect or clear form
+
 });
