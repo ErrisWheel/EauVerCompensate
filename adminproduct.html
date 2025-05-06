@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Admin Dashboard</title>
+    <link rel="stylesheet" href="adminproduct.css">
+    
+</head>
+<body>
+    <header>
+        <div class="home-button">
+            <a href="index.html">Home</a>
+        </div>
+        <h1>Eau Ver Compensate</h1>
+        <p class="tagline">"Arouse the Nose, Command the Room."</p>
+    </header>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Menu</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="https://hash-hood.github.io/Admin/">Dashboard</a></li>
+                    <li><a href="https://hash-hood.github.io/Admin/adminproduct" class="active">Products</a></li>
+                    <li><a href="#">Orders</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Page -->
+        <div class="main-content">
+            <div id="product-management-container">
+                <div class="admin-panel">
+                    <h3>Manage Products</h3>
+                    
+                    <div class="product-controls">
+                        <div class="search-filter-container">
+                            <div class="search-box">
+                                <input type="text" id="product-search" placeholder="Search products...">
+                                <button id="search-button">Search</button>
+                            </div>
+                            
+                            <div class="filters">
+                                <div class="filter-group">
+                                    <label for="gender-filter">Gender:</label>
+                                    <select id="gender-filter">
+                                        <option value="all">All</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="filter-group">
+                                    <label for="sort-by">Sort By:</label>
+                                    <select id="sort-by">
+                                        <option value="name-asc">Name (A-Z)</option>
+                                        <option value="name-desc">Name (Z-A)</option>
+                                        <option value="price-asc">Price (Low to High)</option>
+                                        <option value="price-desc">Price (High to Low)</option>
+                                        <option value="stock-asc">Stock (Low to High)</option>
+                                        <option value="stock-desc">Stock (High to Low)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button id="add-product-btn" class="primary-btn">Add New Product</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="products-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>SKU</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Sales</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-table-body">
+                                <!-- Products will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="page-control" class="paging">
+                        <!-- Page controls will be added here -->
+                    </div>
+                </div>
+                
+                <!-- Interface for adding/editing products -->
+                <div id="product-edit" class="interface">
+                    <div class="box-content">
+                        <span class="close-box">&times;</span>
+                        <h4 id="box-title">Add New Product</h4>
+                        
+                        <form id="product-form">
+                            <div class="form-group">
+                                <label for="product-id">Product ID:</label>
+                                <input type="text" id="product-id" name="id" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-sku">SKU:</label>
+                                <input type="text" id="product-sku" name="sku" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-name">Name:</label>
+                                <input type="text" id="product-name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-gender">Gender:</label>
+                                <select id="product-gender" name="gender" required>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-type">Type:</label>
+                                <input type="text" id="product-type" name="type" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-price">Price:</label>
+                                <input type="number" id="product-price" name="price" step="0.01" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-stock">Stock:</label>
+                                <input type="number" id="product-stock" name="stock" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-description">Description:</label>
+                                <textarea id="product-description" name="description" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-image">Image URL:</label>
+                                <input type="text" id="product-image" name="imageUrl" required>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="primary-btn">Save Product</button>
+                                <button type="button" class="secondary-btn" id="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Interface for stock adjustment -->
+                <div id="stock-Edit" class="interface">
+                    <div class="box-content">
+                        <span class="close-box">&times;</span>
+                        <h3>Adjust Stock</h3>
+                        
+                        <form id="stock-form">
+                            <input type="hidden" id="stock-product-id">
+                            
+                            <div class="product-info">
+                                <p><strong>Product:</strong> <span id="stock-product-name"></span></p>
+                                <p><strong>SKU:</strong> <span id="stock-product-sku"></span></p>
+                                <p><strong>Current Stock:</strong> <span id="stock-current-amount"></span></p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="stock-adjustment">Adjustment:</label>
+                                <div class="stock-adjustment-controls">
+                                    <button type="button" id="decrease-stock">-</button>
+                                    <input type="number" id="stock-adjustment" name="adjustment" value="0">
+                                    <button type="button" id="increase-stock">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="adjustment-reason">Reason:</label>
+                                <select id="adjustment-reason" name="reason">
+                                    <option value="restock">Restock</option>
+                                    <option value="lost">Lost during shipping</option>
+                                    <option value="correction">Inventory Correction</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" id="other-reason-group" style="display: none;">
+                                <label for="other-reason">Specify Reason:</label>
+                                <input type="text" id="other-reason" name="otherReason">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="primary-btn">Update Stock</button>
+                                <button type="button" class="secondary-btn" id="cancel-stock-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Interface for Sales adjustment -->
+                <div id="sales-Edit" class="interface">
+                    <div class="box-content">
+                        <span class="close-box">&times;</span>
+                        <h3>Adjust Sales</h3>
+                        
+                        <form id="sales-form">
+                            <input type="hidden" id="sales-product-id">
+                            
+                            <div class="product-info">
+                                <p><strong>Product:</strong> <span id="sales-product-name"></span></p>
+                                <p><strong>SKU:</strong> <span id="sales-product-sku"></span></p>
+                                <p><strong>Current Sales:</strong> <span id="sales-current-amount"></span></p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sales-adjustment">Adjustment:</label>
+                                <div class="stock-adjustment-controls">
+                                    <button type="button" id="decrease-sales">-</button>
+                                    <input type="number" id="sales-adjustment" name="adjustment" value="0">
+                                    <button type="button" id="increase-sales">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sales-reason">Reason:</label>
+                                <select id="sales-reason" name="reason">
+                                    <option value="new-sale">New Sale</option>
+                                    <option value="return">Customer Return</option>
+                                    <option value="correction">Data Correction</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" id="sales-other-reason-group" style="display: none;">
+                                <label for="sales-other-reason">Specify Reason:</label>
+                                <input type="text" id="sales-other-reason" name="otherReason">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="primary-btn">Update Sales</button>
+                                <button type="button" class="secondary-btn" id="cancel-sales-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="notification-container"></div>
+            
+            <script src="adminproduct.js"></script>
+        </div>
+    </div>
+</body>
+</html>

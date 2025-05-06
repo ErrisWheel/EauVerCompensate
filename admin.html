@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Admin Dashboard</title>
-    <link rel="stylesheet" href="admindesign.css">
+    <link rel="stylesheet" href="admin.css">
     
 </head>
 <body>
@@ -23,10 +23,10 @@
             </div>
             <div class="sidebar-menu">
                 <ul>
-                    <li><a href="#" class="active">Dashboard</a></li>
-                    <li><a href="#">Products</a></li>
+                    <li><a href="https://hash-hood.github.io/Admin/" class="active">Dashboard</a></li>
+                    <li><a href="https://hash-hood.github.io/Admin/adminproduct">Products</a></li>
                     <li><a href="#">Orders</a></li>
-                    <li><a href="#">Customers</a></li>
+
                 </ul>
             </div>
         </div>
@@ -83,14 +83,53 @@
             <!-- Recent Orders Table -->
             <div class="recent-orders">
                 <div class="section-header">
-                    <h3 class="section-title">Recent Orders</h3>
+                    <a href="#" class="section-action">View All</a>
                 </div>
                 <table>
                     <thead>
                         <tr>
-    
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
                         </tr>
-                  
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#ORD-</td>
+                            <td>Marte Sta. Ana</td>
+                            <td>May 1, 2025</td>
+                            <td>Php</td>
+                            <td><span class="status delivered">Delivered</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-</td>
+                            <td>Erris Del Rosario</td>
+                            <td>Apr 30, 2025</td>
+                            <td>Php</td>
+                            <td><span class="status processing">Processing</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-</td>
+                            <td>Norman De la Cruz</td>
+                            <td>Apr 29, 2025</td>
+                            <td>Php</td>
+                            <td><span class="status pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-</td>
+                            <td>Claudine Cordova</td>
+                            <td>Apr 27, 2025</td>
+                            <td>Php</td>
+                            <td><span class="status delivered">Delivered</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-2454</td>
+                            <td>Paul Arevalo</td>
+                            <td>Apr 26, 2025</td>
+                            <td>Php</td>
+                            <td><span class="status cancelled">Cancelled</span></td>
                         </tr>
                     </tbody>
                 </table>
