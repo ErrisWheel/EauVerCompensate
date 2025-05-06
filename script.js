@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 password === "Admin"
             ) {
                 alert("Welcome, Admin!");
-                window.location.href = "https://hash-hood.github.io/Admin/";
+                window.location.href = "https://erriswheel.github.io/EauVerCompensate/admin";
                 return;
             }
 
