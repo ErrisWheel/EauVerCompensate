@@ -1,5 +1,6 @@
 document.getElementById("cashout-form").addEventListener("submit", function(e) {
   e.preventDefault();
+console.log("Form submitted");
 
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
