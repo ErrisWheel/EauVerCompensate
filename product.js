@@ -220,32 +220,39 @@ function showCheckoutModal() {
   };
 
 // tracking
-document.getElementById("cashout-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const amount = document.getElementById("amount").value;
-
+document.addEventListener("DOMContentLoaded", function () {
   const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  console.log("Loaded orders:", orders);
 
-  const newOrder = {
-    orderId: `ORD-${Date.now()}`,
-    customer: name,
-    email: email,
-    phone: phone,
-    trackingNo: `TRK-${Math.floor(100000 + Math.random() * 900000)}`,
-    amount: `₱${amount}`
-  };
+  const cartPage = document.getElementById("cart-page");
+  if (!cartPage) {
+    console.log("cart-page element not found");
+    return;
+  }
 
-  orders.push(newOrder);
-  localStorage.setItem("orders", JSON.stringify(orders));
+  if (orders.length === 0) {
+    cartPage.innerHTML = "<p>No orders found.</p>";
+    return;
+  }
 
-  console.log("Form submitted");
-  alert("Order placed successfully!");
+  let orderHTML = "<h2>Order History</h2>";
+  orders.forEach((order, index) => {
+    orderHTML += 
+      <div class="order-record">
+        <p><strong>Order #${index + 1}</strong></p>
+        <p>Name: ${order.name}</p>
+        <p>Email: ${order.email}</p>
+        <p>Address: ${order.address}</p>
+        <p>Phone: ${order.phone}</p>
+        <p>Total: ₱${order.total}</p>
+        <p>Tracking No: ${order.tracking}</p>
+        <hr>
+      </div>
+    ;
+  });
+
+  cartPage.innerHTML = orderHTML;
 });
-
       
   // form submit
   const form = document.getElementById('checkout-form');
