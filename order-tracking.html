@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Order Tracking</title>
+    <link rel="stylesheet" href="admintrack.css">
+
+</head>
+<body>
+    <header>
+        <div class="home-button">
+            <a href="https://erriswheel.github.io/EauVerCompensate/">Home</a>
+        </div>
+        <h1>Eau Ver Compensate</h1>
+        <p class="tagline">"Arouse the Nose, Command the Room."</p>
+    </header>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Menu</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="admin-dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="adminproduct.html">Products</a></li>
+                    <li><a href="order-tracking.html">Orders</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h3>Order Tracking</h3>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="recent-orders" id="tracking-info">
+                <h3>Order Details</h3>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Tracking No</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-table-body">
+                        <!-- Order details will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="admintrack.js"></script>
+</body>
+</html>
