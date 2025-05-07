@@ -10,7 +10,9 @@
     <div id="sideNav" class="side-nav">
         <ul>
             <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
             <li><a href="https://erriswheel.github.io/About-Page/">About</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </div>
     
@@ -135,7 +137,6 @@
     <section id="cart-page" class="hidden">
       </section>
 
-    <!-- Checkout Modal -->
     <div id="checkout-modal" class="modal hidden">
         <div class="modal-content">
           <span class="close-btn" id="close-checkout-btn">&times;</span>
@@ -154,6 +155,7 @@
             <input type="tel" id="cust-phone" name="cust-phone" required />
     
             <p>Order Total: ₱<span id="checkout-order-total">0.00</span></p>
+            <p>Shipping: ₱<span id="checkout-shipping">0.00</span></p>
             <p>Grand Total: ₱<span id="checkout-grand-total">0.00</span></p>
             <p>Tracking Number: <span id="checkout-tracking-no"></span></p>
 
@@ -176,8 +178,8 @@
             </div>
         </div>
     </div>
+    
     <script src="cart.js"></script>
     <script src="script.js"></script>
-     <script src="main-tracking.js"></script>
 </body>
 </html>
